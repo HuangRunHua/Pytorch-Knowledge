@@ -99,3 +99,17 @@ print(f"Device tensor is stored on: {tensor.device}")
 >>> Datatype of tensor: torch.float32
 >>> Device tensor is stored on: cpu
 """
+
+# Operations on Tensors
+#       Over 100 tensor operations, including arithmetic, linear algebra, matrix manipulation (transposing, indexing, 
+#   slicing),sampling and more are comprehensively described here.
+#       Each of these operations can be run on the GPU (at typically higher speeds than on a CPU). 
+#   If you’re using Colab, allocate a GPU by going to Runtime > Change runtime type > GPU.
+#       By default, tensors are created on the CPU. We need to explicitly move tensors to the GPU using ".to" method (after checking for GPU availability). 
+#       Keep in mind that copying large tensors across devices can be expensive in terms of time and memory!
+
+# We move our tensor to the GPU if available, Mac is not aviliable
+if torch.cuda.is_available():
+    tensor = tensor.to('cuda')
+
+    
