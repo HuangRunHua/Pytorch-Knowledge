@@ -111,5 +111,3 @@ print(f"Device tensor is stored on: {tensor.device}")
 # We move our tensor to the GPU if available, Mac is not aviliable
 if torch.cuda.is_available():
     tensor = tensor.to('cuda')
-
-    
