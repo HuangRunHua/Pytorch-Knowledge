@@ -1,22 +1,22 @@
 ################################################################################################################
-# Tensors are a specialized data structure that are very similar to arrays and matrices. 
-# In PyTorch, we use tensors to encode the inputs and outputs of a model, as well as the model’s parameters.
+# 张量是一种特殊的数据结构，与数组和矩阵非常相似。
+# 在 PyTorch 中，我们使用张量来编码模型的输入和输出，以及模型的参数。
 #
-# Tensors are similar to NumPy’s ndarrays, except that tensors can run on GPUs or other hardware accelerators. 
-# In fact, tensors and NumPy arrays can often share the same underlying memory, 
-# eliminating the need to copy data (see Bridge with NumPy). 
-# Tensors are also optimized for automatic differentiation. 
-# If you’re familiar with ndarrays, you’ll be right at home with the Tensor API.
+# 张量类似于 NumPy 的 ndarray，只是张量可以在 GPU 或其他硬件加速器上运行。
+# 实际上，张量和 NumPy 数组通常可以共享相同的底层内存，
+# 消除复制数据的需要（参见使用 NumPy 进行桥接）。
+# 张量也针对自动微分进行了优化。
+# 如果你熟悉 ndarrays，你就会对 Tensor API 熟悉。
 ################################################################################################################
 
 import torch
 import numpy as np
 
 #########################################################################################################
-# Initializing a Tensor
-#   Tensors can be initialized in various ways.
-#   [1] Directly from data.
-#        Tensors can be created directly from data. The data type is automatically inferred.
+# 初始化张量
+# 张量可以通过多种方式初始化。
+# [1] 直接来自数据。
+# 张量可以直接从数据中创建。 数据类型是自动推断的。
 #########################################################################################################
 data = [[1, 2],
         [3, 4]]
@@ -27,8 +27,8 @@ x_data = torch.tensor(data)
 """
 
 #########################################################################################################
-#   [2] From a NumPy array
-#       Tensors can be created from NumPy arrays (and vice versa - see Bridge with NumPy).
+# [2] 来自 NumPy 数组
+# 张量可以从 NumPy 数组创建（反之亦然 - 请参阅 Bridge with NumPy）。
 #########################################################################################################
 np_array = np.array(data)
 """
@@ -38,9 +38,9 @@ np_array = np.array(data)
 x_np = torch.from_numpy(np_array)
 
 #########################################################################################################
-#   [3] From another tensor:
-#       The new tensor retains the properties (shape, datatype) of the argument tensor, 
-#           unless explicitly overridden.
+# [3] 从另一个张量：
+# 新张量保留参数张量的属性（形状、数据类型），
+# 除非显式覆盖。
 #########################################################################################################
 
 # retains the properties of x_data
@@ -61,9 +61,9 @@ print(f"Random Tensor: \n {x_rand} \n")
 """
 
 #########################################################################################################
-#   [4] With random or constant values:
-#       shape is a tuple of tensor dimensions. In the functions below, 
-#       it determines the dimensionality of the output tensor.
+# [4] 使用随机或恒定值：
+# shape 是张量维度的元组。 在下面的函数中，
+# 它决定了输出张量的维度。
 #########################################################################################################
 shape = (2,3,)
 rand_tensor = torch.rand(shape)
@@ -87,8 +87,8 @@ print(f"Zeros Tensor: \n {zeros_tensor}")
             [0., 0., 0.]])
 """
 
-# Attributes of a Tensor
-#   Tensor attributes describe their shape, datatype, and the device on which they are stored.
+# 张量的属性
+# 张量属性描述了它们的形状、数据类型和存储它们的设备。
 tensor = torch.rand(3,4)
 
 print(f"Shape of tensor: {tensor.shape}")
@@ -100,15 +100,15 @@ print(f"Device tensor is stored on: {tensor.device}")
 >>> Device tensor is stored on: cpu
 """
 
-# Operations on Tensors
-#       Over 100 tensor operations, including arithmetic, linear algebra, matrix manipulation (transposing, indexing, 
-#   slicing),sampling and more are comprehensively described here.
-#       Each of these operations can be run on the GPU (at typically higher speeds than on a CPU). 
-#   If you’re using Colab, allocate a GPU by going to Runtime > Change runtime type > GPU.
-#       By default, tensors are created on the CPU. We need to explicitly move tensors to the GPU using ".to" method (after checking for GPU availability). 
-#       Keep in mind that copying large tensors across devices can be expensive in terms of time and memory!
+# 张量运算
+# 超过 100 种张量运算，包括算术、线性代数、矩阵操作（转置、索引、
+# slicing)、sampling 等在这里进行了全面的描述。
+# 这些操作中的每一个都可以在 GPU 上运行（通常比在 CPU 上的速度更高）。
+# 如果您使用的是 Colab，请转到运行时 > 更改运行时类型 > GPU 来分配 GPU。
+# 默认情况下，张量是在 CPU 上创建的。 我们需要使用“.to”方法（在检查 GPU 可用性之后）将张量显式移动到 GPU。
+# 请记住，跨设备复制大张量在时间和内存方面可能会很昂贵！
 
-# We move our tensor to the GPU if available, Mac is not aviliable
+# 如果可用，我们将张量移动到 GPU，然而Mac系统下不可用
 if torch.cuda.is_available():
     tensor = tensor.to('cuda')
 
@@ -120,7 +120,7 @@ print('Last column:', tensor[..., -1])
 # 修改第一列所有行的元素为0
 tensor[:,1] = 0
 
-# Joining tensors You can use “torch.cat” to concatenate a sequence of tensors along a given dimension. 
-# See also “torch.stack”, another tensor joining op that is subtly different from torch.cat.
+# 连接张量您可以使用“torch.cat”沿给定维度连接一系列张量。
+# 另见“torch.stack”，另一个与torch.cat略有不同的张量加入操作。
 t1 = torch.cat([tensor, tensor, tensor], dim=1)
 print(t1)
