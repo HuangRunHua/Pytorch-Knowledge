@@ -111,3 +111,16 @@ print(f"Device tensor is stored on: {tensor.device}")
 # We move our tensor to the GPU if available, Mac is not aviliable
 if torch.cuda.is_available():
     tensor = tensor.to('cuda')
+
+# Standard numpy-like indexing and slicing:
+tensor = torch.ones(4, 4)
+print('First row: ', tensor[0])
+print('First column: ', tensor[:, 0])
+print('Last column:', tensor[..., -1])
+# 修改第一列所有行的元素为0
+tensor[:,1] = 0
+
+# Joining tensors You can use “torch.cat” to concatenate a sequence of tensors along a given dimension. 
+# See also “torch.stack”, another tensor joining op that is subtly different from torch.cat.
+t1 = torch.cat([tensor, tensor, tensor], dim=1)
+print(t1)
