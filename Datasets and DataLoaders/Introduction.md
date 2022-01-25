@@ -195,6 +195,14 @@ test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)
 
 ```python
 # Display image and label.
+# iter()可将train_dataloader变为可迭代的迭代器
+# next()表示开始遍历迭代器，初始情况下next()默认为第一个数据，如
+# >>> l=[2,3,4]
+# >>> iterl=iter(l)
+# >>> iterl.next()
+# 2
+# >>> iterl.next()
+# 3
 train_features, train_labels = next(iter(train_dataloader))
 print(f"Feature batch shape: {train_features.size()}")
 print(f"Labels batch shape: {train_labels.size()}")
