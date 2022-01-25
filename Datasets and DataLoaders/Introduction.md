@@ -79,6 +79,7 @@ cols, rows = 3, 3
 for i in range(1, cols * rows + 1):
     # randint返回一个随机的张量，张量的shape由参数size指定
     # 张量里的元素大小范围为0～len(training_data)
+    # 使用 item() 将torch.randint(len(training_data), size=(1,))转换为 Python 可读的类型
     sample_idx = torch.randint(len(training_data), size=(1,)).item()
     img, label = training_data[sample_idx]
     figure.add_subplot(rows, cols, i)
