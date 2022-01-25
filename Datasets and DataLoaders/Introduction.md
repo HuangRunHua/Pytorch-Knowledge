@@ -114,6 +114,7 @@ class CustomImageDataset(Dataset):
         return len(self.img_labels)
 
     def __getitem__(self, idx):
+        # self.img_labels.iloc[idx, 0]表示选取第0列第idx个元素
         img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
         image = read_image(img_path)
         label = self.img_labels.iloc[idx, 1]
@@ -173,6 +174,7 @@ def __getitem__(self, idx):
 ```python
 from torch.utils.data import DataLoader
 
+# shuffle=True表示打乱数据集
 train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)
 test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)
 ```
