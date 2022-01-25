@@ -165,6 +165,8 @@ def __len__(self):
 
 ```python
 def __getitem__(self, idx):
+    # 假设self.img_dir = "Data", self.img_labels.iloc[1, 0] = "tshirt2.jpg"
+    # 使用.join()函数后img_path = "Data/tshirt2.jpg"
     img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
     image = read_image(img_path)
     label = self.img_labels.iloc[idx, 1]
