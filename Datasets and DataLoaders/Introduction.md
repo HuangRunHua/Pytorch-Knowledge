@@ -135,9 +135,18 @@ tshirt2.jpg, 0
 ......
 ankleboot999.jpg, 9
 ```
+经过`self.img_labels = pd.read_csv(annotations_file, names=['file_name', 'label'])`处理后，`self.img_labels`的输出为
+```python
+          file_name  label
+0       tshirt1.jpg      0
+1       tshirt2.jpg      0
+......
+1000  ankleboot999.jpg      9
+```
 
 ```python
 def __init__(self, annotations_file, img_dir, transform=None, target_transform=None):
+    # read_csv实现了对annotations_file的读取，并给annotations_file按照列来给定names的标签
     self.img_labels = pd.read_csv(annotations_file, names=['file_name', 'label'])
     self.img_dir = img_dir
     self.transform = transform
