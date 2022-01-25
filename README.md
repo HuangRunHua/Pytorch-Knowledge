@@ -13,7 +13,7 @@
 - 在云端
 - 本地：此选项要求您首先在本地计算机上设置 PyTorch 和 TorchVision（[安装说明](https://pytorch.org/get-started/locally/)）。 将代码复制到您最喜欢的 IDE 中。
 
-## 如何使用本指南
+## 指南目录
 1. [Tensors](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Tensors/Introduction.md)
 2. [Datasets and DataLoaders](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Datasets%20and%20DataLoaders/Introduction.md)
 
