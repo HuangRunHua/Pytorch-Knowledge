@@ -124,3 +124,92 @@ tensor[:,1] = 0
 # 另见“torch.stack”，另一个与torch.cat略有不同的张量加入操作。
 t1 = torch.cat([tensor, tensor, tensor], dim=1)
 print(t1)
+
+# torch.stack的用法在于不改变数据的shape的情况下，增加一维度来达到扩充张量的效果
+T1 = torch.tensor([[1, 2, 3],
+                 [4, 5, 6],
+                 [7, 8, 9]])
+T2 = torch.tensor([[10, 20, 30],
+                 [40, 50, 60],
+                 [70, 80, 90]])
+# 新增加的维度在于拼接的个数，T1与T2共两个tensors叠加，因此最终生成的张量情况有三种，即(2x3x3), (3x2x3)与(3,3,2)
+# dim的数可以看成2在[3,3]列表里的位置
+# dim为0时为(2x3x3), 以此类推
+print(torch.stack((T1,T2),dim=0))
+
+# 算术运算
+# 张量的矩阵乘法运算方法，三种方法
+y1 = tensor @ tensor.T
+y2 = tensor.matmul(tensor.T)
+
+y3 = torch.rand_like(tensor)
+torch.matmul(tensor, tensor.T, out=y3)
+
+# 张量的元素乘积，三种方法
+z1 = tensor * tensor
+z2 = tensor.mul(tensor)
+
+z3 = torch.rand_like(tensor)
+torch.mul(tensor, tensor, out=z3)
+
+# 单元素张量
+# 如果您有一个单元素张量，例如通过将张量的所有值聚合为一个值，您可以使用 item() 将其转换为 Python 数值：
+agg = tensor.sum()
+agg_item = agg.item()
+print(agg_item, type(agg_item))
+"""
+>>> 12.0 <class 'float'>
+"""
+
+# 就地操作 
+# 将结果存储到操作数中的操作称为就地操作。 它们用 _ 后缀表示。 
+# 例如：x.copy_(y)，x.t_()，会改变x。
+print(tensor, "\n")
+tensor.add_(5)
+print(tensor)
+"""
+>>> tensor([[1., 0., 1., 1.],
+            [1., 0., 1., 1.],
+            [1., 0., 1., 1.],
+            [1., 0., 1., 1.]])
+
+>>> tensor([[6., 5., 6., 6.],
+            [6., 5., 6., 6.],
+            [6., 5., 6., 6.],
+            [6., 5., 6., 6.]])
+"""
+
+# 和 NumPy 的连接
+# CPU 和 NumPy 数组上的张量可以共享它们的底层内存位置，改变一个会改变另一个。
+
+# Tensor 转 Numpy
+t = torch.ones(5)
+print(f"t: {t}")
+n = t.numpy()
+print(f"n: {n}")
+"""
+>>> t: tensor([1., 1., 1., 1., 1.])
+>>> n: [1. 1. 1. 1. 1.]
+"""
+
+# 改变tensor的值将会影响numpy
+t.add_(1)
+print(f"t: {t}")
+print(f"n: {n}")
+"""
+>>> t: tensor([2., 2., 2., 2., 2.])
+>>> n: [2. 2. 2. 2. 2.]
+"""
+
+# Numpy数组到Tensor的转换
+n = np.ones(5)
+t = torch.from_numpy(n)
+
+np.add(n, 1, out=n)
+print(f"t: {t}")
+print(f"n: {n}")
+
+"""
+>>> t: tensor([2., 2., 2., 2., 2.], dtype=torch.float64)
+>>> n: [2. 2. 2. 2. 2.]
+"""
