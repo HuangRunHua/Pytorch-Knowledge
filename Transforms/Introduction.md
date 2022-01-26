@@ -1,9 +1,9 @@
 # 数据转换
 数据并不总是以训练机器学习算法所需的最终处理形式出现。 我们使用转换来对数据进行一些操作并使其适合训练。
 
-所有 TorchVision 数据集都有两个参数 - 用于修改特征的`transform`和用于修改标签的 `target_transform` - 接受包含转换逻辑的可调用对象。 [torchvision.transforms](https://pytorch.org/vision/stable/transforms.html) 模块提供了几个开箱即用的常用转换。
+所有 TorchVision 数据集都有两个参数 - 用于修改特征的`transform`和用于修改标签的 `target_transform` - 接受包含转换逻辑的可调用对象。[torchvision.transforms](https://pytorch.org/vision/stable/transforms.html) 模块提供了几个开箱即用的常用转换。
 
-FashionMNIST 特征是 PIL 图像格式，标签是整数。 对于训练，我们需要将特征作为归一化张量，并将标签作为 one-hot 编码张量。 one-hot 编码过程参考[示例代码]()。这里简要解释one-hot编码要达到的目的。
+FashionMNIST 特征是 PIL 图像格式，标签是整数。 对于训练，我们需要将特征作为归一化张量，并将标签作为 one-hot 编码张量。 one-hot 编码过程参考[示例代码](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Transforms/one_hot_example.py)。这里简要解释one-hot编码要达到的目的。
 
 假设6个数据集如下，其中`[0,3,2,3,1,1]`分别表示数据集所属于的类别，同时假设数据集的种类为`num_classes = 4`种。经过编码后最终得到的数据集矩阵为：
 ```python
