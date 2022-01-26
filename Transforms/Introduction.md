@@ -68,7 +68,7 @@ target_transform = Lambda(lambda y: torch.zeros(
     10, dtype=torch.float).scatter_(dim=0, index=torch.tensor(y), value=1))
 ```
 
-`.scatter(dim, index, src)`的用法可以参考[示例代码]()，详细介绍可以参考[pytorch 深入理解 tensor.scatter_ ()用法](https://blog.csdn.net/ao1886/article/details/107749007)或[官方文档](https://pytorch.org/docs/stable/generated/torch.Tensor.scatter_.html)。
+`.scatter(dim, index, src)`的用法可以参考[示例代码](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Transforms/scatter_example.py)，详细介绍可以参考[pytorch 深入理解 tensor.scatter_ ()用法](https://blog.csdn.net/ao1886/article/details/107749007)或[官方文档](https://pytorch.org/docs/stable/generated/torch.Tensor.scatter_.html)。
 
 ## 延伸阅读
 - [torchvision.transforms API](https://pytorch.org/vision/stable/transforms.html)
