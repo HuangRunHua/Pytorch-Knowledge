@@ -28,6 +28,7 @@ ds = datasets.FashionMNIST(
     train=True,
     download=True,
     transform=ToTensor(),
+    # value=1将会使得被选中的索引处的值为1
     target_transform=Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(0, torch.tensor(y), value=1))
 )
 ```
