@@ -64,8 +64,7 @@ Extracting data/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz to data/FashionMNIST/
 Lambda 转换应用任何用户定义的 lambda 函数。 在这里，我们定义了一个函数来将整数转换为 one-hot 编码张量。 它首先创建一个大小为 10（我们数据集中的标签数量）的零张量，并调用 [scatter_](https://pytorch.org/docs/stable/generated/torch.Tensor.scatter_.html)，它在标签 y 给定的索引上分配 `value=1`。
 
 ```python
-target_transform = Lambda(lambda y: torch.zeros(
-    10, dtype=torch.float).scatter_(dim=0, index=torch.tensor(y), value=1))
+target_transform = Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(dim=0, index=torch.tensor(y), value=1))
 ```
 
 `.scatter(dim, index, src)`的用法可以参考[示例代码](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Transforms/scatter_example.py)，详细介绍可以参考[pytorch 深入理解 tensor.scatter_ ()用法](https://blog.csdn.net/ao1886/article/details/107749007)或[官方文档](https://pytorch.org/docs/stable/generated/torch.Tensor.scatter_.html)。
