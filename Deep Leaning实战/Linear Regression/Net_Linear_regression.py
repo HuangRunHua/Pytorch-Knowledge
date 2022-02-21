@@ -14,7 +14,8 @@ class LR(nn.Module):
         # Linear为预设的线性神经网络模块
         self.linear = nn.Linear(1,1)
 
-    # 前向传播函数
+    # 前向传播函数（必须实现）
+    # 利用当前参数w与输入数据来得到输出结果的预测，用于下一步计算损失函数
     def forward(self, x):
         out = self.linear(x)
         return out
