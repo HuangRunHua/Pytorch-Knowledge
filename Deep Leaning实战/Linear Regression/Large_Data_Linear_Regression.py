@@ -56,7 +56,7 @@ w, loss = train(10000, learning_rate=1e-4)
 finish = perf_counter()
 train_time = finish - start
 
-print("Total Train Time: %s" % time)
+print("Total Train Time: %s" % train_time)
 print("final loss:", loss.item())
 print("weights:", w.data)
 
