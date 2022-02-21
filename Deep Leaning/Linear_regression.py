@@ -1,12 +1,19 @@
 import torch
 import matplotlib.pyplot as plt
 
-# @Function Produce_X(x)
-# 扩充输入向量x的维度
-# 向量x的长度为训练集的个数，x = [1,2,3]
-# X = Produce_X(x) -> X = [1,1
-#                          2,1
-#                          3,1]
+"""
+本程序使用梯度下降算法实现数据的线性回归
+"""
+
+"""
+@Function Produce_X(x)
+扩充输入向量x的维度
+向量x的长度为训练集的个数
+>>> x = [1,2,3]
+>>> X = Produce_X(x) -> X = [1,1
+                             2,1
+                             3,1]
+"""
 def Produce_X(x):
     x0 = torch.ones(x.numpy().size)
     X = torch.stack((x, x0), dim=1)
