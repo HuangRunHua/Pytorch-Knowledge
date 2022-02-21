@@ -65,6 +65,6 @@ LR_model, loss = train(LR_model, criterion, optimizer, 10000)
 finish = perf_counter()
 train_time = finish - start
 
-print("Total Train Time: %s" % time)
+print("Total Train Time: %s" % train_time)
 print("final loss:", loss.item())
 print("weights:", list(LR_model.parameters()))
