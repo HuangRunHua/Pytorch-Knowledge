@@ -1,0 +1,61 @@
+import torch
+import matplotlib.pyplot as plt
+from torch import nn, optim
+from time import perf_counter, time
+
+
+class LR(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+        # Linear第一个参数表示输入数据的维度，第二个参数表示输出数据的维度
+        self.linear = nn.Linear(1,1)
+
+    # 前向传播函数
+    def forward(self, x):
+        out = self.linear(x)
+        return out
+
+def train(model, criterion, optimizer, epochs):
+    for epoch in range(epochs):
+        # 将inputs输入到神经网络模型中
+        output = model(inputs)
+        loss = criterion(output, target)
+        optimizer.zero_grad()
+        loss.backward()
+        # 权值更新过程
+        optimizer.step()
+        if epoch % 80 == 0:
+            draw(output,loss)
+    return model, loss
+
+def draw(output, loss):
+    # 清空图像画布
+    plt.cla()
+    plt.scatter(x.numpy(), y.numpy())
+    plt.plot(x.numpy(), output.data.numpy(), 'r-', lw=5)
+    # 打印loss值
+    plt.text(0.5,0,'loss=%s' % (loss.item()), fontdict={'size':20, 'color':'red'})
+    plt.pause(0.005)
+
+# unsqueeze的作用和Produce_X作用一样
+x = torch.unsqueeze(torch.linspace(-3,3,100000), dim=1)
+# 实际输出
+y = x + 1.2*torch.rand(x.size())
+
+LR_model = LR()
+inputs = x
+target = y
+
+# Pytorch预设的损失函数
+criterion = nn.MSELoss()
+# SGD第一个参数为需要优化的神经网络模型参数
+optimizer = optim.SGD(LR_model.parameters(), lr=1e-4)
+
+start  = perf_counter()
+LR_model, loss = train(LR_model, criterion, optimizer, 10000)
+finish = perf_counter()
+train_time = finish - start
+
+print("Total Train Time: %s" % time)
+print("final loss:", loss.item())
+print("weights:", list(LR_model.parameters))
