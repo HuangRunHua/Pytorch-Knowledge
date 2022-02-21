@@ -2,6 +2,10 @@ import torch
 import matplotlib.pyplot as plt
 from time import perf_counter, time
 
+"""
+本程序使用梯度下降算法实现大规模数据的线性回归
+"""
+
 def Produce_X(x):
     x0 = torch.ones(x.numpy().size)
     X = torch.stack((x, x0), dim=1)
