@@ -3,11 +3,15 @@ import matplotlib.pyplot as plt
 from torch import nn, optim
 from time import perf_counter, time
 
+"""
+本程序使用人工神经元实现线性回归
+"""
 
 class LR(nn.Module):
     def __init__(self) -> None:
         super().__init__()
         # Linear第一个参数表示输入数据的维度，第二个参数表示输出数据的维度
+        # Linear为预设的线性神经网络模块
         self.linear = nn.Linear(1,1)
 
     # 前向传播函数
@@ -17,10 +21,13 @@ class LR(nn.Module):
 
 def train(model, criterion, optimizer, epochs):
     for epoch in range(epochs):
-        # 将inputs输入到神经网络模型中
+        # 将inputs输入到神经网络模型中，此时调用forward函数
         output = model(inputs)
+        # 调用Pytorch预设的损失函数来计算损失
         loss = criterion(output, target)
+        # 将模型的参数梯度初始化为0
         optimizer.zero_grad()
+        # 求解损失函数对w的梯度向量
         loss.backward()
         # 权值更新过程
         optimizer.step()
@@ -49,6 +56,7 @@ target = y
 # Pytorch预设的损失函数
 criterion = nn.MSELoss()
 # SGD第一个参数为需要优化的神经网络模型参数
+# SGD为随机梯度下降函数
 optimizer = optim.SGD(LR_model.parameters(), lr=1e-4)
 
 start  = perf_counter()
@@ -58,4 +66,4 @@ train_time = finish - start
 
 print("Total Train Time: %s" % time)
 print("final loss:", loss.item())
-print("weights:", list(LR_model.parameters))
+print("weights:", list(LR_model.parameters()))
