@@ -7,14 +7,15 @@ import torch.nn.functional as F
 使用Pytorch利用神经网络实现非线性回归
 非线性函数选用三次方程
 
+神经网络层数为三层:
+    - 输入层
+    - 隐藏层
+    - 输出层
+
 在无激活函数的情况下, 神经网络相当于多个线性模型进行叠加
 激活函数的出现使得网络可以拟合非线性的函数
 
 每一个神经元最终的输出在激活函数内进行, 多层神经元组成人工神经网络
-
-torch.nn.Linear(in_features, out_features):
-    - in_features: 每一个输入样本的大小
-    - out_features: 每一个输出样本的大小
 
 本案例激活函数选取`torch.nn.functional.relu()`
 """
