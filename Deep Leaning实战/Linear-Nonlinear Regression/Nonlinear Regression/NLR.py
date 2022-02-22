@@ -21,8 +21,10 @@ import torch.nn.functional as F
 """
 
 class Net(nn.Module):
-    # num_hidden为隐含层节点数
-    # input_feature为输入的维度
+    """
+    num_hidden为隐含层节点数
+    input_feature为输入的维度
+    """
     def __init__(self, input_feature, num_hidden, outputs) -> None:
         super().__init__()
         # 定义神经网络的隐含层
@@ -63,8 +65,10 @@ def draw(output, loss):
 
 # 指定输入数据, 其维度为1维
 x = torch.unsqueeze(torch.linspace(-3, 3, 10000), dim=1)
-# 给输入添加噪声来模拟实际情况, 输出数据维度也为1维
-# 因此神经网络中`self.out`最终维度为1
+"""
+给输入添加噪声来模拟实际情况, 输出数据维度也为1维
+因此神经网络中`self.out`最终维度为1
+"""
 y = x.pow(3) + 0.3*torch.rand(x.size())
 
 # plt.scatter(x.numpy(), y.numpy(), s=0.01)
