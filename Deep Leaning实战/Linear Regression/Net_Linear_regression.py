@@ -67,4 +67,13 @@ train_time = finish - start
 
 print("Total Train Time: %s" % train_time)
 print("final loss:", loss.item())
-print("weights:", list(LR_model.parameters()))
+
+# 获取回归方程的参数
+[w,b] = LR_model.parameters()
+print(w.item())
+print(b.item())
+"""
+输出结果:
+0.9949362874031067
+0.40299367904663086
+"""
