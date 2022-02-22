@@ -13,8 +13,11 @@
 - 在云端
 - 本地：此选项要求您首先在本地计算机上设置 PyTorch 和 TorchVision（[安装说明](https://pytorch.org/get-started/locally/)）。 将代码复制到您最喜欢的 IDE 中。
 
-## 指南目录
+## Facebook官方教程目录
 1. [Tensors](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Tensors/Introduction.md)
 2. [Datasets and DataLoaders](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Datasets%20and%20DataLoaders/Introduction.md)
 3. [Transforms](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Transforms)
 
+## Pytorch深度学习实战目录
+1. [线性与非线性回归问题](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战/Linear-Nonlinear%20Regression)
+2. [逻辑回归问题](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战/Logistic%20Regression)
