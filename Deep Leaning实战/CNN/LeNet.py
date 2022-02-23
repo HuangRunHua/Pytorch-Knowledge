@@ -16,21 +16,6 @@ from torch import nn, optim
  ---------------------------------------------------------------------------------------  
 """
 
-transform = transforms.Compose([
-    # 将加载的数据转为Tensor对象
-    transforms.ToTensor(),
-    # 将数据进行归一化
-    transforms.Normalize((0.1307,), (0.3081,))
-])
-
-"""
-'data'代表数据集下载存储文件夹
-train=True代表加载训练集
-download=True代表自动下载数据集
-"""
-trainset = datasets.MNIST('data', train=True, download=True, transform=transform)
-testset = datasets.MNIST('data', train=False, download=True, transform=transform)
-
 class LeNet(nn.Module):
     def __init__(self) -> None:
         super().__init__()
@@ -83,7 +68,7 @@ def train(model, criterion, opitimizer, epochs=1):
         for i, data in enumerate(trainloader, 0):
             inputs, labels = data
             optimizer.zero_grad()
-            outputs = model(inputs)
+            outputs = model.forward(inputs)
             loss = criterion(outputs, labels)
             loss.backward()
             opitimizer.step()
@@ -96,7 +81,60 @@ def train(model, criterion, opitimizer, epochs=1):
     print('Finished Training')
 
 
+"""
+保存与加载模型的方法:
+方法一:
+    - torch.save(lenet, 'model.pkl') 保存整个模型
+    - lenet = torch.load('model.pkl) 加载模型
+方法二:
+    - torch.save(lenet.state_dict(), 'model.pkl') 保存模型参数
+    - torch.load_state_dict(torch.load('model.pkl')) 加载模型参数
+"""
+def save_param(model, path):
+    torch.save(model.state_dict(), path)
+
+def load_param(model, path):
+    model.load_state_dict(torch.load(path))
+
+
+def test(testloader, model):
+    correct = 0
+    total = 0
+    for data in testloader:
+        images, labels = data
+        outputs = model(images)
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum()
+    print('Accuracy on the test set: %d %%' %(100*correct/total))
+
+
+"""
+程序开始的位置
+"""
+transform = transforms.Compose([
+    # 将加载的数据转为Tensor对象
+    transforms.ToTensor(),
+    # 将数据进行归一化
+    transforms.Normalize((0.1307,), (0.3081,))
+])
+
+"""
+'data'代表数据集下载存储文件夹
+train=True代表加载训练集
+download=True代表自动下载数据集
+"""
+trainset = datasets.MNIST('data', train=True, download=True, transform=transform)
+testset = datasets.MNIST('data', train=False, download=True, transform=transform)
+
+# 初始化神经网络
 lenet = LeNet()
+
+"""
+ ------------------------------------
+|             CNN训练部分              |
+ ------------------------------------
+"""
 
 """
 batch_size表示一次性加载数据量
@@ -110,4 +148,11 @@ optimizer = optim.SGD(lenet.parameters(), lr=0.001, momentum=0.9)
 criterion = nn.CrossEntropyLoss()
 
 train(lenet, criterion, optimizer, epochs=2)
+
+"""
+ ------------------------------------
+|             CNN测试部分              |
+ ------------------------------------
+"""
+testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=True, num_workers=0)
 
