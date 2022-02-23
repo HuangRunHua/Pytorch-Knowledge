@@ -1,19 +1,21 @@
-from torchvision import datasets, transforms
+import os
 import torch
-import matplotlib.pyplot as plt
 import torch.nn.functional as F
 from torch import nn, optim
+from torchvision import datasets, transforms
 
 """
 本程序使用CNN神经网络实现手写字体识别(MINST)
+LeNet网络结构如下所示:
  ---------------------------------------------------------------------------------------
 |            卷积               池化                卷积               池化                |
 |输入(28x28)------->C1(6x24x24)------->S2(6x12x12)------->C3(16x8x8)------->S4(16x4x4)   |  
 |                                                                               |全连    |
 |                                                                               |全连    |
-|                                         高斯连          全连层                  |全连    |
+|                                         高斯层          全连层                  |全连    |
 |                               输出(10)<--------F6(84)<--------F5(120)<---------        |
  ---------------------------------------------------------------------------------------  
+ MINST问题为分类问题, 因此神经网络的输出为该图片中数字属于0-9共10种情况的概率。
 """
 
 class LeNet(nn.Module):
@@ -77,7 +79,6 @@ def train(model, criterion, opitimizer, epochs=1):
             if i % 1000 == 999:
                 print('[Epoch: %d, Batch: %5d] Loss: %.3f' % (epoch+1, i+1, running_loss/1000))
                 running_loss = 0.0
-    print(i, data)
     print('Finished Training')
 
 
@@ -94,15 +95,19 @@ def save_param(model, path):
     torch.save(model.state_dict(), path)
 
 def load_param(model, path):
-    model.load_state_dict(torch.load(path))
+    if os.path.exists(path):
+        model.load_state_dict(torch.load(path))
 
-
+"""
+神经网络的测试部分, 由于神经网络的输出为0-9与图片标签相同
+可以采用输出与标签做差的方式求取预测的准确率
+"""
 def test(testloader, model):
     correct = 0
     total = 0
     for data in testloader:
         images, labels = data
-        outputs = model(images)
+        outputs = model.forward(images)
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum()
@@ -147,7 +152,9 @@ trainloader = torch.utils.data.DataLoader(trainset, batch_size=4, shuffle=True, 
 optimizer = optim.SGD(lenet.parameters(), lr=0.001, momentum=0.9)
 criterion = nn.CrossEntropyLoss()
 
+load_param(lenet, 'model.pkl')
 train(lenet, criterion, optimizer, epochs=2)
+save_param(lenet, 'model.pkl')
 
 """
  ------------------------------------
@@ -155,4 +162,5 @@ train(lenet, criterion, optimizer, epochs=2)
  ------------------------------------
 """
 testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=True, num_workers=0)
+test(testloader, lenet)
 
