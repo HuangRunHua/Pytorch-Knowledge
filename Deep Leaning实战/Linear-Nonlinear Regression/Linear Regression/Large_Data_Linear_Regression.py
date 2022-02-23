@@ -1,6 +1,6 @@
 import torch
 import matplotlib.pyplot as plt
-from time import perf_counter, time
+from time import perf_counter
 
 """
 本程序使用梯度下降算法实现大规模数据的线性回归
