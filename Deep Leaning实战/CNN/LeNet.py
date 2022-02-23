@@ -41,6 +41,9 @@ class LeNet(nn.Module):
         x = F.max_pool2d(F.relu(self.c3(x)),2)
         """
         view将x的形状转化成1维向量
+        原先x.size() = 16x4x4 维度=16, 现要转成1维度即x.size() = 1x(16x4x4)
+        x.view(-1,given_number) <==> x.size() = given_number * x的维度
+        由于given_number = 16x4x4, 因此x的维度 = 1
         """
         x = x.view(-1, self.num_flat_features(x))
         x = F.relu(self.fc1(x))
