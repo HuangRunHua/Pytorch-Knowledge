@@ -22,3 +22,4 @@
 ## Pytorch深度学习实战目录
 1. [线性与非线性回归问题](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战/Linear-Nonlinear%20Regression)
 2. [逻辑回归问题](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战/Logistic%20Regression)
+3. [CNN实战: 手写字体识别](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战/CNN)
