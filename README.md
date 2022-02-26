@@ -3,7 +3,11 @@
 
 大多数机器学习工作流程都涉及处理数据、创建模型、优化模型参数和保存经过训练的模型。 本教程向您介绍在 PyTorch 中实现的完整 ML 工作流，并提供链接以了解有关每个概念的更多信息。
 
-我们将使用 `FashionMNIST` 数据集来训练一个神经网络，该网络预测输入图像是否属于以下类别之一：`T 恤/上衣`、`裤子`、`套头衫`、`连衣裙`、`外套`、`凉鞋`、`衬衫`、`运动鞋`、`包`或`脚踝`。
+本教程将涉及机器学习的基础知识, 涵盖`回归分类问题`。逐渐过渡至深度学习许多知名的基础框架, 如`CNN`, `RNN`, `fastai`等。
+
+[Facebook官方教程目录](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Facebook官方教程)将使用 `FashionMNIST` 数据集来训练一个神经网络，该网络预测输入图像是否属于以下类别之一：`T 恤/上衣`、`裤子`、`套头衫`、`连衣裙`、`外套`、`凉鞋`、`衬衫`、`运动鞋`、`包`或`脚踝`。
+
+[Pytorch深度学习实战目录](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战)将从最简单的线性回归问题开始逐渐过渡至复杂的深度学习模型。
 
 > 本教程假定您基本熟悉 Python 和深度学习概念。本文档(Facebook官方教程)翻译自[Pytorch 官网](https://pytorch.org/tutorials/beginner/basics/intro.html)
 
