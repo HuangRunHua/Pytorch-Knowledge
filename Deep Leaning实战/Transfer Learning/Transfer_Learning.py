@@ -50,7 +50,7 @@ data_transforms = {
 }
 
 # 数据集文件夹路径
-data_directory = 'data'
+data_directory = 'data_set'
 
 trainset = datasets.ImageFolder(os.path.join(data_directory, 'train'), data_transforms['train'])
 testset = datasets.ImageFolder(os.path.join(data_directory, 'test'), data_transforms['test'])
