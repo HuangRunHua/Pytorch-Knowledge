@@ -9,7 +9,7 @@
 
 [Pytorch深度学习实战目录](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战)将从最简单的线性回归问题开始逐渐过渡至复杂的深度学习模型。
 
-> 本教程假定您基本熟悉 Python 和深度学习概念。本文档(Facebook官方教程)翻译自[Pytorch 官网](https://pytorch.org/tutorials/beginner/basics/intro.html)
+> 本教程假定您基本熟悉 Python 和深度学习概念。其中文档(Facebook官方教程)翻译自[Pytorch 官网](https://pytorch.org/tutorials/beginner/basics/intro.html)
 
 ## 运行教程代码
 
