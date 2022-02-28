@@ -7,6 +7,10 @@ from torch import nn
 
 LSTM结构如下:
 ┌───────────────────────────────────────────────────┐
+|                                 y_t               |
+|                                  ▲                |
+|                                  |                |
+|                                  |                |
 |     c_{t-1}    ┌──────────────────┐      c_t      |
 |   ───────────▶ |                  | ───────────▶  |
 |     h_{t-1}    |   LSTM NetWork   |     h_t       |
@@ -35,4 +39,22 @@ user_def_lstm_cell = lstm_cell(inputs, (h0, c0))
        grad_fn=<MulBackward0>), 
     tensor([[ 0.5382,  0.6192, -1.1791,  0.2368, -0.1694, -0.2025, -0.9808]],
        grad_fn=<AddBackward0>)
+"""
+
+"""
+Pytorch内部的LSTM模块
+"""
+lstm = nn.LSTM(input_size=5, hidden_size=7)
+inputs_lstm = torch.randn(3, 2, 5)
+h0_lstm = torch.randn(1, 2, 7)
+c0_lstm = torch.randn(1, 2, 7)
+
+output, (h1, c1) = lstm(inputs_lstm, (h0_lstm, c0_lstm))
+print(output.size())
+print(h1.size())
+print(c1.size())
+"""
+>>> torch.Size([3, 2, 7])
+>>> torch.Size([1, 2, 7])
+>>> torch.Size([1, 2, 7])
 """
