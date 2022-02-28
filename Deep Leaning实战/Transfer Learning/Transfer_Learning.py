@@ -137,9 +137,9 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(alexnet.classifier.parameters(), lr=0.001, momentum=0.9)
 
 """
- -----------------------------------------------
-|             AlexNet训练以及测试部分              |
- -----------------------------------------------
+┌─────────────────────────────────────────────────┐
+|             AlexNet Train and Test              |
+└─────────────────────────────────────────────────┘
 """
 load_param(alexnet, 'tl_model.pkl')
 train(alexnet, criterion, optimizer, epochs=2)
