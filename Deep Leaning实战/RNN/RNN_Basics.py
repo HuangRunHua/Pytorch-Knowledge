@@ -17,6 +17,7 @@ from torch import nn
 |    ------->|                   |                              |                 |
 |           x_t                 x_0                            x_t                |
 |                                                                                 |
+|           RNN              RNN_Cell_0                    RNN_Cell_t             |
  --------------------------------------------------------------------------------
 
 RNN的数学本质:
@@ -48,6 +49,14 @@ print(rnn_cell.weight_ih)
  -------------------------
 |      初始化RNN Cell      |
  ------------------------- 
+
+RNN Cell初始化需要两个输入:
+    1. 输人向量x_t: (batch,input_size)
+    2. 上一个时刻的隐藏向量h_{t-1}: (batcth,hidden_size)
+
+以下代码初始化一个RNN Cell:
+    - 输人: 批量数为1, 特征维度数为5
+    - 上一个时刻的隐藏向量: 批量数为1、维度为7
 """
 inputs = torch.randn(1, 5)
 hidden = torch.randn(1, 7)
@@ -62,6 +71,16 @@ user_def_rnn_cell = rnn_cell(inputs, hidden)
  --------------------
 |      初始化RNN      |
  -------------------- 
+
+RNN初始化需要两个输人:
+    1. 输人向量序列x: (sea, batch, input-size)
+    2. 上一个时刻的隐藏向量h_{t-1}: (layers*direction, batch, hidden_size)
+        - layers 表示 RNN 的隐藏节点的层数, 默认为1
+        - direction 表示 RNN 的方向, 默认为1
+
+以下代码初始化一个RNN:
+    - 输人: 批量数为2、序列长度为3、特征维度数为5
+    - 隐藏向量: 批量数为2、维度为7
 """
 rnn = nn.RNN(input_size=5, hidden_size=7)
 
