@@ -64,7 +64,7 @@ for step in range(600):
     x = torch.from_numpy(x_np).unsqueeze(0).unsqueeze(-1)
     y = torch.from_numpy(y_np).unsqueeze(0).unsqueeze(-1)
     prediction, h_state, c_state = lstm(x, h_state, c_state)
-    # 防止程序自动计算隐藏向量的梯度值
+    # 防止程序自动计算隐藏向量的梯度值, 缺少程序将会计算两次梯度
     h_state = h_state.data
     c_state = c_state.data
     loss = loss_func(prediction, y)
