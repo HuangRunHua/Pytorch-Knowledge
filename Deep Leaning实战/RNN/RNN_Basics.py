@@ -54,6 +54,8 @@ RNN Cell初始化需要两个输入:
     1. 输人向量x_t: (batch,input_size)
     2. 上一个时刻的隐藏向量h_{t-1}: (batcth,hidden_size)
 
+注意: RNN Cell一次无法处理一串序列
+
 以下代码初始化一个RNN Cell:
     - 输人: 批量数为1, 特征维度数为5
     - 上一个时刻的隐藏向量: 批量数为1、维度为7
@@ -77,6 +79,8 @@ RNN初始化需要两个输人:
     2. 上一个时刻的隐藏向量h_{t-1}: (layers*direction, batch, hidden_size)
         - layers 表示 RNN 的隐藏节点的层数, 默认为1
         - direction 表示 RNN 的方向, 默认为1
+
+注意: RNN一次可以处理一串序列
 
 以下代码初始化一个RNN:
     - 输人: 批量数为2、序列长度为3、特征维度数为5
