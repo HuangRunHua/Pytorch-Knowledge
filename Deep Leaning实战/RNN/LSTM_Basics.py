@@ -23,15 +23,18 @@ LSTM结构如下:
 └───────────────────────────────────────────────────┘
 """
 
+"""
+┌─────────────────────────────────────────┐
+|            Pytorch LSTM Cell            |
+└─────────────────────────────────────────┘
+"""
 lstm_cell = nn.LSTMCell(input_size=5, hidden_size=7)
 """
 >>> LSTMCell(5, 7)
 """
-
 inputs = torch.randn(1, 5)
 h0 = torch.randn(1, 7)
 c0 = torch.randn(1, 7)
-
 user_def_lstm_cell = lstm_cell(inputs, (h0, c0))
 """
 >>> user_def_lstm_cell
@@ -42,7 +45,9 @@ user_def_lstm_cell = lstm_cell(inputs, (h0, c0))
 """
 
 """
-Pytorch内部的LSTM模块
+┌────────────────────────────────────┐
+|            Pytorch LSTM            |
+└────────────────────────────────────┘
 """
 lstm = nn.LSTM(input_size=5, hidden_size=7)
 inputs_lstm = torch.randn(3, 2, 5)
