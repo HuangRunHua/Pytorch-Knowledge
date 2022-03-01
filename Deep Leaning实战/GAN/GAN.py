@@ -2,7 +2,7 @@
 
 
 """
-本程序使用Generative Adversarial Network(GAN)实现二次元头像的生成
+本程序使用Generative Adversarial Network(GAN)实现柴犬头像的生成
 
 Generator解析: 
     1. 一个神经网络或者一个函数
