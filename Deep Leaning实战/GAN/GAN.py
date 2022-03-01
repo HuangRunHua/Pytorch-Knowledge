@@ -1,4 +1,5 @@
 import os
+from turtle import forward
 from sklearn.utils import shuffle
 import torch
 import torchvision
@@ -170,6 +171,42 @@ class D(nn.Module):
         out = out.view(-1, 256*6*6)
         out = self.fc(out)
         return out
+
+"""
+┌────────────────────────────────────┐
+|          Define Generator          |
+└────────────────────────────────────┘
+"""
+class G(nn.Module):
+    def __init__(self, nc, ngf, nz, feature_size) -> None:
+        super().__init__()
+        self.prj = nn.Linear(feature_size, nz*6*6)
+        self.layer1 = nn.Sequential(
+            nn.ConvTranspose2d(nz, ngf*4, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(ngf*4), nn.ReLU()
+        )
+        self.layer2 = nn.Sequential(
+            nn.ConvTranspose2d(ngf*4, ngf*2, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(ngf*2), nn.ReLU()
+        )
+        self.layer3 = nn.Sequential(
+            nn.ConvTranspose2d(ngf*2, ngf, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(ngf), nn.ReLU()
+        )
+        self.layer4 = nn.Sequential(
+            nn.ConvTranspose2d(ngf, nc, kernel_size=4, stride=2, padding=1),
+            nn.Tanh()
+        )
+    
+    def forward(self, x):
+        out = self.prj(x)
+        out = out.view(-1, 1024, 6, 6)
+        out = self.layer1(out)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = self.layer4(out)
+        return out
+
 
 data_transform = transforms.Compose([
     transforms.Resize((96, 96)),
