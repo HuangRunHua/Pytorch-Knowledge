@@ -89,5 +89,5 @@ GAN算法流程:
     | |────────▶| Generator |────────▶| IMG |────────▶|  Discrim  |────────▶0.2
     | |         |           |         └─────┘         |           |
     └─┘         └───────────┘                         └───────────┘       
-  Vectors           Update                                Fixed
+   Vector           Update                                Fixed
 """
