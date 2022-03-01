@@ -205,7 +205,7 @@ class G(nn.Module):
         out = self.layer4(out)
         return out
 
-def train(d, g, criterion, d_optimizer, g_optimizer, epochs=1, show_every=1000, print_every=10):
+def train(d, g, criterion, d_optimizer, g_optimizer, epochs=1, show_every=100, print_every=10):
     iter_count = 0
     for epoch in range(epochs):
         for inputs, _ in trainloader:
@@ -237,11 +237,13 @@ def train(d, g, criterion, d_optimizer, g_optimizer, epochs=1, show_every=1000, 
             g_loss.backward()
             g_optimizer.step()
 
+            # 设定每100次显示生成的图片
             if (iter_count % show_every == 0):
                 print('Epoch: {}, Iter: {}, D: {:.4}, G: {:.4}'.format(epoch, iter_count, d_loss.item(), g_loss.item()))
                 pic_name = "Epoch_" + str(epoch) + "Iter_" + str(iter_count)
                 imshow(torchvision.utils.make_grid(fake_inputs.date), pic_name)
 
+            # 设定每10次打印一次损失值
             if (iter_count % print_every == 0):
                 print('Epoch: {}, Iter: {}, D: {:.4}, G: {:.4}'.format(epoch, iter_count, d_loss.item(), g_loss.item()))
                 pic_name = "Epoch_" + str(epoch) + "Iter_" + str(iter_count)
