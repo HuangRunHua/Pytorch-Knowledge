@@ -210,12 +210,14 @@ def train(d, g, criterion, d_optimizer, g_optimizer, epochs=1, show_every=100, p
     for epoch in range(epochs):
         for inputs, _ in trainloader:
             real_inputs = inputs
-            fake_inputs = g(torch.rand(5, 100))
+            fake_inputs = g(torch.randn(5, 100))
 
-            real_labels = torch.ones(real_inputs.size(0))
-            fake_labels = torch.zeros(5)
+            real_labels = torch.ones(real_inputs.size(0)).unsqueeze(1)
+            fake_labels = torch.zeros(5).unsqueeze(1)
 
             real_outputs = d(real_inputs)
+            print(real_outputs.size())
+            print(real_labels.size())
             d_loss_real = criterion(real_outputs, real_labels)
             real_scores = real_outputs
 
@@ -230,7 +232,7 @@ def train(d, g, criterion, d_optimizer, g_optimizer, epochs=1, show_every=100, p
 
             fake_inputs = g(torch.randn(5, 100))
             outputs = d(fake_inputs)
-            real_labels = torch.ones(outputs.size(0))
+            real_labels = torch.ones(outputs.size(0)).unsqueeze(1)
             g_loss = criterion(outputs, real_labels)
 
             g_optimizer.zero_grad()
@@ -241,7 +243,8 @@ def train(d, g, criterion, d_optimizer, g_optimizer, epochs=1, show_every=100, p
             if (iter_count % show_every == 0):
                 print('Epoch: {}, Iter: {}, D: {:.4}, G: {:.4}'.format(epoch, iter_count, d_loss.item(), g_loss.item()))
                 pic_name = "Epoch_" + str(epoch) + "Iter_" + str(iter_count)
-                imshow(torchvision.utils.make_grid(fake_inputs.date), pic_name)
+                # imshow(torchvision.utils.make_grid(fake_inputs.date), pic_name)
+                imshow(torchvision.utils.make_grid(fake_inputs), pic_name)
 
             # 设定每10次打印一次损失值
             if (iter_count % print_every == 0):
