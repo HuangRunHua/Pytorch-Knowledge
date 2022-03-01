@@ -1,6 +1,4 @@
 import os
-from turtle import forward
-from sklearn.utils import shuffle
 import torch
 import torchvision
 import torch.nn as nn
