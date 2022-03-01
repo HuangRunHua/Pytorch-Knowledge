@@ -1,5 +1,11 @@
-
-
+import os
+from sklearn.utils import shuffle
+import torch
+import torchvision
+import torch.nn as nn
+import torch.optim as optim
+import matplotlib.pyplot as plt
+from torchvision import datasets, transforms, models
 
 """
 本程序使用Generative Adversarial Network(GAN)实现柴犬头像的生成
@@ -90,4 +96,67 @@ GAN算法流程:
     | |         |           |         └─────┘         |           |
     └─┘         └───────────┘                         └───────────┘       
    Vector           Update                                Fixed
+
+本程序数据集结构: 
+    ├── /Pytorch-Knowledge/
+    │  └── /dog/
+    │    ├── /0/    // 存放生成器生成的图片
+    │    ├── /1/    // 存放真实的柴犬图片
+    │       ├── image_0.jpeg 
+    │       ├── image_1.jpeg
+    │       ...
+    │       └──image_99.jpeg
+
+本程序鉴别器网络结构:
+┌────────────────────────────────────────────────────────────────────────────────────────────┐
+|                                                                                            |
+| ┌─────┐   Cov   ┌─────┐   Cov   ┌─────┐   Cov   ┌─────┐   Cov   ┌─────┐
+| | IMG |────────▶| IMG |────────▶| IMG |────────▶| IMG |────────▶| IMG |────────▶Sigmoid
+| └─────┘ (4x4,2) └─────┘         └─────┘         └─────┘         └─────┘
+|  Input 
+| (96x96) 
+└────────────────────────────────────────────────────────────────────────────────────────────┘ 
 """
+
+def imshow(inputs, picname):
+    plt.ion
+    inputs = inputs / 2 + 0.5
+    inputs = inputs.numpy().transpose((1, 2, 0))
+    plt.imshow(inputs)
+    plt.pause(0.01)
+    plt.savefig(picname+".jpg")
+    plt.close()
+
+class D(nn.Module):
+    def __init__(self, nc, ndf) -> None:
+        super().__init__()
+        self.layer1 = nn.Sequential(
+            nn.Conv2d(nc, ndf, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(ndf), nn.LeakyReLU(0.2, inplace=True)
+        )
+        self.layer2 = nn.Sequential(
+            nn.Conv2d(ndf, ndf*2, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(ndf*2), nn.LeakyReLU(0.2, inplace=True)
+        )
+        self.layer3 = nn.Sequential(
+            nn.Conv2d(ndf*2, ndf*4, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(ndf*4), nn.LeakyReLU(0.2, inplace=True)
+        )
+        self.layer4 = nn.Sequential(
+            nn.Conv2d(ndf*4, ndf*8, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(ndf*8), nn.LeakyReLU(0.2, inplace=True)
+        )
+        self.fc = nn.Sequential(nn.Linear(256*6*6, 1), nn.Sigmoid())
+
+data_transform = transforms.Compose([
+    transforms.Resize((96, 96)),
+    transforms.RandomHorizontalFlip(),
+    transforms.ToTensor(),
+    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+])
+
+trainset = datasets.ImageFolder('dog', data_transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=5,shuffle=True, num_workers=0)
+
+inputs, _ = next(iter(trainloader))
+imshow(torchvision.utils.make_grid(inputs), "RealDataSample")
