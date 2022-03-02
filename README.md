@@ -29,3 +29,4 @@
 3. [CNN实战: 手写字体识别](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战/CNN)
 4. [迁移学习: 使用AlexNet实现猫狗二分类](https://github.com/HuangRunHua/Pytorch-Knowledge/tree/main/Deep%20Leaning实战/Transfer%20Learning)
 5. [RNN实战: 利用LSTM实现函数预测](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Deep%20Leaning实战/RNN/Sin_Cos_LSTM.py)
+6. [GAN实战: 利用GAN实现柴犬头像的生成](https://github.com/HuangRunHua/Pytorch-Knowledge/blob/main/Deep%20Leaning实战/GAN/GAN.py)
